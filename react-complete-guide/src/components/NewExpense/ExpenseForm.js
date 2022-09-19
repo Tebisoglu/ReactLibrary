@@ -1,42 +1,50 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 const ExpenseForm = () => {
-  // const [enteredTitle,setEnteredTitle] = useState('');
-  // const [enteredAmount,setEnteredAmmount] = useState('');
-  // const [enteredDate,setEnteredDate] = useState('');
-  const [userInput, setUserInput] = useState({
-    enteredTitle: "",
-    enteredAmount: "",
-    enteredDate: "",
-  });
+  const [enteredTitle, setEnteredTitle] = useState("");
+  const [enteredAmount, setEnteredAmmount] = useState("");
+  const [enteredDate, setEnteredDate] = useState("");
+  //   const [userInput, setUserInput] = useState({
+  //     enteredTitle: "",
+  //     enteredAmount: "",
+  //     enteredDate: "",
+  //   });
   const titleChangeHandler = (event) => {
-    // setUserInput({
-    //   ...userInput,  // so will not lose previous state data
-    //   enteredTitle: event.target.value,
-    // }); // this aproach: React does not guarantee latest snapshot state.
+    setEnteredTitle(event.target.value);
+    // // setUserInput({
+    // //   ...userInput,  // so will not lose previous state data
+    // //   enteredTitle: event.target.value,
+    // // }); // this aproach: React does not guarantee latest snapshot state.
 
-    setUserInput((prevState)=>{
-        return {...prevState,enteredTitle:event.target.value};  // React does guarantee latest state.So you should state update when your state update depend prev. state
-    })
+    // setUserInput((prevState)=>{
+    //     return {...prevState,enteredTitle:event.target.value};  // React does guarantee latest state.So you should state update when your state update depend prev. state
+    // })
   };
 
   const amountChangeHandler = (event) => {
-    setUserInput((prevState)=>{
-        return {...prevState,enteredAmount:event.target.value};  // React does guarantee latest state.So you should state update when your state update depend prev. state
-    })
+    setEnteredAmmount(event.target.value);
   };
 
   const dateChangeHandler = (event) => {
-    setUserInput((prevState)=>{
-        return {...prevState,enteredDate:event.target.value};  // React does guarantee latest state.So you should state update when your state update depend prev. state
-    })
+    setEnteredDate(event.target.value);
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault(); // default javascript behaviour.Page can not reload.
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
+    };
+
+    console.log(expenseData);
   };
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__controls">
           <label>Title</label>
-          s <input type="text" onChange={titleChangeHandler} />
+          <input type="text" onChange={titleChangeHandler} />
         </div>
         <div className="new-expense__controls">
           <label>Amount</label>
