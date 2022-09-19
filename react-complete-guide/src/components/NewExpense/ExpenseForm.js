@@ -10,24 +10,26 @@ const ExpenseForm = () => {
     enteredDate: "",
   });
   const titleChangeHandler = (event) => {
-    setUserInput({
-      ...userInput,  // so will not lose previous state data
-      enteredTitle: event.target.value,
-    });
+    // setUserInput({
+    //   ...userInput,  // so will not lose previous state data
+    //   enteredTitle: event.target.value,
+    // }); // this aproach: React does not guarantee latest snapshot state.
+
+    setUserInput((prevState)=>{
+        return {...prevState,enteredTitle:event.target.value};  // React does guarantee latest state.So you should state update when your state update depend prev. state
+    })
   };
 
   const amountChangeHandler = (event) => {
-    setUserInput({
-        ...userInput,
-        enteredAmount: event.target.value,
-      });
+    setUserInput((prevState)=>{
+        return {...prevState,enteredAmount:event.target.value};  // React does guarantee latest state.So you should state update when your state update depend prev. state
+    })
   };
 
   const dateChangeHandler = (event) => {
-    setUserInput({
-        ...userInput,
-        enteredDate: event.target.value,
-      });
+    setUserInput((prevState)=>{
+        return {...prevState,enteredDate:event.target.value};  // React does guarantee latest state.So you should state update when your state update depend prev. state
+    })
   };
   return (
     <form>
