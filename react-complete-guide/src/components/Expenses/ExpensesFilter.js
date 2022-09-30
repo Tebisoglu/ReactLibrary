@@ -4,7 +4,7 @@ import './ExpensesFilter.css'
 const ExpensesFilter = (props) => {
 
  const yearChangeHandler =(event)=>{
-     props.onFilterByYear(event.target.value);
+     props.onChangeFilter(event.target.value);
  }
   return (
     <div className="expenses-filter">
